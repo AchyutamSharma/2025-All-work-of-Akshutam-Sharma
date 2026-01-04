@@ -1,0 +1,21 @@
+body{
+  background-color: rgb(32, 32, 32);
+}
+h1{
+  color: rgb(93, 102, 234);
+  font-size: 44px;
+  margin: 15px ;
+}
+
+button{
+  padding: 5px;
+  margin: 5px;
+  width: 120px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+h2{
+  color: aliceblue;
+  margin: 0 0 0 10px;
+}

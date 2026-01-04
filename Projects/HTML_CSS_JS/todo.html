@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List (Array Version)</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f2f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .todo-container {
+      background: white;
+      padding: 20px;
+      width: 350px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-section {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 10px 14px;
+      border: none;
+      background-color: #4caf50;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f8f9fa;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .edit-btn, .delete-btn {
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 6px 10px;
+      margin-left: 5px;
+    }
+
+    .delete-btn {
+      background-color: #e53935;
+    }
+
+    .edit-btn:hover {
+      background-color: #1976d2;
+    }
+
+    .delete-btn:hover {
+      background-color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 To-Do List (Array Version)</h1>
+  <div class="todo-container">
+    <div class="input-section">
+      <input type="text" id="taskInput" placeholder="Enter a new task" />
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    let tasks = []; // 🔹 Array to store all tasks
+
+    function renderTasks() {
+      const taskList = document.getElementById("taskList");
+      taskList.innerHTML = ""; // Clear list before re-rendering
+
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${task}</span>
+          <div>
+            <button class="edit-btn" onclick="editTask(${index})">Edit</button>
+            <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
+          </div>
+        `;
+        taskList.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+      if (taskText === "") return alert("Please enter a task!");
+
+      tasks.push(taskText); // Add to array
+      input.value = "";
+      renderTasks(); // Refresh list
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1); // Remove from array
+      renderTasks();
+    }
+
+    function editTask(index) {
+      const newTask = prompt("Edit your task:", tasks[index]);
+      if (newTask !== null && newTask.trim() !== "") {
+        tasks[index] = newTask.trim(); // Update in array
+        renderTasks();
+      }
+    }
+
+    // Initial render
+    renderTasks();
+  </script>
+</body>
+</html>
